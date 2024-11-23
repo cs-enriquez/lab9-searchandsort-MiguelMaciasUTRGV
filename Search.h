@@ -32,7 +32,23 @@ bool seqSearch(string target, string arr[], int start, int end) {
 // Return true if target exists in the array with size n,
 //    return false otherwise 
 bool binSearch(float target, float arr[], int n) {
-    
+    int left = 0;
+    int right = n - 1;
+    int mid = left + (right - left) / 2;
+
+    while(left <= right) {
+        if(arr[mid] == target){
+            return true;
+        }
+        if(arr[mid] < target){
+            left = mid + 1;
+        }
+        else{
+            right = mid - 1;
+        }
+
+    }
+    return false;
 
 
 }
@@ -41,22 +57,21 @@ bool binSearch(float target, float arr[], int n) {
 // Return true if target exists in the array with size n
 //   return false otherwise
 bool binSearchR(char target, char charray[], int n) {
-    int mid = n/2;
 
-    if(arr[mid] == target){
-        return true;
-    }
-    if(n < 0){
+    int mid = n / 2;
+    if(n <= 0){
         return false;
     }
+    if(charray[mid] == target){
+        return true;
+    }
 
-    if(target > arr[mid]){
-        int *start & arr[mid+1];
-        return binSearchR(start, n/2, target);
+    if(target > charray[mid]){
+        return binSearchR(target, charray + mid + 1, n - mid - 1);
     }
-    else{
-        return binSearchR(arr, n/2, target);
-    }
+
+    return binSearchR(target, charray, mid);
+
 }
 
 // Implement a brand new sorting algorithm
@@ -80,9 +95,13 @@ Step 3: Finally, use your two functions above to complete the following in newSo
         *** You can make this recursive, if you wish!
 */
 
-void swap(double darray[], ...) {}
+void swap(double darray[], int index1, int index2) {
+    double tmp = darray[index1];
+    darray[index1] = darray[index2];
+    darray[index2] = tmp;
+}
 
-int minFind(double darray[], ...) {
+int minFind(double darray[], int start, int n) {
     return -1;
 }
 
