@@ -20,7 +20,7 @@ void printArray(flexibleType array[], int size) {
 // return true if target exists in the array within this range,
 //    return false otherwise
 bool seqSearch(string target, string arr[], int start, int end) {
-    for(int x = start; x < end; x++){
+    for(int x = start; x <= end; x++){
         if(arr[x] == target){
             return true;
         }
@@ -34,9 +34,9 @@ bool seqSearch(string target, string arr[], int start, int end) {
 bool binSearch(float target, float arr[], int n) {
     int left = 0;
     int right = n - 1;
-    int mid = left + (right - left) / 2;
-
+    
     while(left <= right) {
+        int mid = left + (right - left) / 2;
         if(arr[mid] == target){
             return true;
         }
@@ -101,8 +101,21 @@ void swap(double darray[], int index1, int index2) {
     darray[index2] = tmp;
 }
 
-int minFind(double darray[], int start, int n) {
-    return -1;
-}
+int minFind(double darray[], int n) {
+    int minimum = 0;
+    for(int x = 1; x < n; x++){
+        if(darray[x] < darray[minimum]){
+            minimum = x;
+        }
 
-void newSort(double darray[], int n) {}
+    }
+    return minimum;
+}
+void newSort(double darray[], int n) {
+    for(int x = 0; x < n - 1; x++){
+
+        int minI = minFind(darray + x, n - x) + x;
+
+        swap(darray, x, minI);
+    }
+}
